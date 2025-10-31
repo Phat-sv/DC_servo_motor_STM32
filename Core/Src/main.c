@@ -43,6 +43,8 @@
 #define RIGHT_ENCODER_CHANNEL_2 GPIO_PIN_5
 #define ROS_TIMEOUT             (uint32_t)120000
 
+#define UART_PACKET_SIZE 11
+
 #define UART_TX_POLLING 0x01
 #define UART_TX_DMA     0x02
 #define UART_TX_MODE    UART_TX_DMA
@@ -111,8 +113,8 @@ float wheel_radius = 0.035f;
 // ================= variables for communication between stm and rasp (UART) ===================//
 bool              need_soft_reset     = false;
 volatile uint8_t  interrupt_timer_cnt = 0;
-uint8_t           received_data_from_rasp[11];
-uint8_t           transmit_data_to_rasp[11];
+uint8_t           received_data_from_rasp[UART_PACKET_SIZE];
+uint8_t           transmit_data_to_rasp[UART_PACKET_SIZE];
 volatile bool     uart_ready        = true;
 volatile uint32_t last_ros_cmd_time = 0;
 
