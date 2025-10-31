@@ -71,12 +71,12 @@ DMA_HandleTypeDef  hdma_usart3_rx;
 float vel_rad_s_left  = 0.0f;
 float vel_rad_s_right = 0.0f;
 
-uint32_t ecd_pulse_non_direction_left  = 0.0f;
-uint32_t ecd_pulse_non_direction_right = 0.0f;
+volatile uint32_t ecd_pulse_non_direction_left  = 0;
+volatile uint32_t ecd_pulse_non_direction_right = 0;
 
 // velocities received command from rasp (linear and angular)
-float Vx = 0.0f;
-float Vw = 0.0f;
+volatile float Vx = 0.0f;
+volatile float Vw = 0.0f;
 // transform command into velocitie for each wheel
 float V_left_required  = 0.0f;
 float V_right_required = 0.0f;
@@ -109,12 +109,12 @@ float wheel_base   = 0.268f;
 float wheel_radius = 0.035f;
 
 // ================= variables for communication between stm and rasp (UART) ===================//
-bool             need_soft_reset     = false;
-volatile uint8_t interrupt_timer_cnt = 0;
-uint8_t          received_data_from_rasp[11];
-uint8_t          transmit_data_to_rasp[11];
-volatile bool    uart_ready        = true;
-uint32_t         last_ros_cmd_time = 0;
+bool              need_soft_reset     = false;
+volatile uint8_t  interrupt_timer_cnt = 0;
+uint8_t           received_data_from_rasp[11];
+uint8_t           transmit_data_to_rasp[11];
+volatile bool     uart_ready        = true;
+volatile uint32_t last_ros_cmd_time = 0;
 
 /* USER CODE END PV */
 
@@ -254,6 +254,10 @@ int main(void)
     {
       Vx = 0;
       Vw = 0;
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, 0);
       NVIC_SystemReset();
     }
 
