@@ -658,14 +658,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     if (V_left >= 0)
     {
       left_pwm = pid_left(V_left, vel_rad_s_left, Kp_left, Ki_left, Kb_left, delta_t);
-      __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, 0);         // set pwm
-      __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2, left_pwm);  // set pwm
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);         // set pwm
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, left_pwm);  // set pwm
     }
     else
     {
       left_pwm = pid_left(-V_left, vel_rad_s_left, Kp_left, Ki_left, Kb_left, delta_t);
-      __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, left_pwm);  // set pwm
-      __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2, 0);         // set pwm
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, left_pwm);  // set pwm
+      __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);         // set pwm
     }
 
     // Calculate velocity of right motor and control
