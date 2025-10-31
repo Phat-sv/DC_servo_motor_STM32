@@ -11,7 +11,7 @@ Method and funtions:
 * UART communication (DMA/IT) with Raspberry Pi.
 * Implement safety mechanism: ROS timeout, soft reset, shutdown when necessary; Optimize data transmission by DMA to reduce CPU load.
 
-# [Results here](https://github.com/Phat-sv/DC_servo_motor_STM32/tree/main/images)
+# [Click to see result](https://github.com/Phat-sv/DC_servo_motor_STM32/tree/main/images)
 ![Velocity control](images/result_4.png)
 
 
